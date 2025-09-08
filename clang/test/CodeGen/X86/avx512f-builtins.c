@@ -3091,6 +3091,7 @@ __m512i test_mm512_maskz_mullo_epi32 (__mmask16 __k,__m512i __A, __m512i __B) {
   //CHECK: select <16 x i1> %{{.*}}, <16 x i32> %{{.*}}, <16 x i32> %{{.*}}
   return _mm512_maskz_mullo_epi32(__k,__A,__B);
 }
+TEST_CONSTEXPR(match_v16si(_mm512_maskz_mullo_epi32(0xFF00, (__m512i)(__v16si){+1, -2, +3, -4, +5, -6, +7, -8, +9, -10, +11, -12, +13, -14, +15, -16}, (__m512i)(__v16si){-32, -30, +28, +26, -24, -22, +20, +18, -16, -14, +12, +10, -8, +6, -4, +2}), 0, 0, 0, 0, 0, 0, 0, 0, -144, 140, 132, -120, -104, -84, -60, -32));
 
 __m512i test_mm512_mask_mullo_epi32 (__mmask16 __k,__m512i __A, __m512i __B, __m512i __src) {
   //CHECK-LABEL: test_mm512_mask_mullo_epi32
@@ -3098,12 +3099,14 @@ __m512i test_mm512_mask_mullo_epi32 (__mmask16 __k,__m512i __A, __m512i __B, __m
   //CHECK: select <16 x i1> %{{.*}}, <16 x i32> %{{.*}}, <16 x i32> %{{.*}}
   return _mm512_mask_mullo_epi32(__src,__k,__A,__B);
 }
+TEST_CONSTEXPR(match_v16si(_mm512_mask_mullo_epi32(_mm512_set1_epi32(1), 0xFF00, (__m512i)(__v16si){+1, -2, +3, -4, +5, -6, +7, -8, +9, -10, +11, -12, +13, -14, +15, -16}, (__m512i)(__v16si){-32, -30, +28, +26, -24, -22, +20, +18, -16, -14, +12, +10, -8, +6, -4, +2}), 1, 1, 1, 1, 1, 1, 1, 1, -144, 140, 132, -120, -104, -84, -60, -32));
 
 __m512i test_mm512_mullo_epi32(__m512i __A, __m512i __B) {
   //CHECK-LABEL: test_mm512_mullo_epi32
   //CHECK: mul <16 x i32>
   return _mm512_mullo_epi32(__A,__B);
 }
+TEST_CONSTEXPR(match_v16si(_mm512_mullo_epi32((__m512i)(__v16si){+1, -2, +3, -4, +5, -6, +7, -8, +9, -10, +11, -12, +13, -14, +15, -16}, (__m512i)(__v16si){-32, -30, +28, +26, -24, -22, +20, +18, -16, -14, +12, +10, -8, +6, -4, +2}), -32, 60, 84, -104, -120, 132, 140, -144, -144, 140, 132, -120, -104, -84, -60, -32));
 
 __m512i test_mm512_mullox_epi64 (__m512i __A, __m512i __B) {
   // CHECK-LABEL: test_mm512_mullox_epi64
@@ -3117,6 +3120,7 @@ __m512i test_mm512_mask_mullox_epi64 (__m512i __W, __mmask8 __U, __m512i __A, __
   // CHECK: select <8 x i1> %{{.*}}, <8 x i64> %{{.*}}, <8 x i64> %{{.*}}
   return (__m512i) _mm512_mask_mullox_epi64(__W, __U, __A, __B);
 }
+TEST_CONSTEXPR(match_v8di(_mm512_mask_mullox_epi64(_mm512_set1_epi64(1), 0xF0, (__m512i)(__v8di){+1, -2, +3, -4, +5, -6, +7, -8}, (__m512i)(__v8di){-32, -30, +28, +26, -24, -22, +20, +18}), 1, 1, 1, 1, -120, 132, 140, -144));
 
 __m512d test_mm512_add_round_pd(__m512d __A, __m512d __B) {
   // CHECK-LABEL: test_mm512_add_round_pd

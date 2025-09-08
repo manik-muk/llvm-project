@@ -959,6 +959,7 @@ __m256i test_mm256_mullo_epi32(__m256i a, __m256i b) {
   // CHECK: mul <8 x i32>
   return _mm256_mullo_epi32(a, b);
 }
+TEST_CONSTEXPR(match_v8si(_mm256_mullo_epi32((__m256i)(__v8si){+1, -2, +3, -4, +5, -6, +7, -8}, (__m256i)(__v8si){-32, -30, +28, +26, -24, -22, +20, +18}), -32, 60, 84, -104, -120, 132, 140, -144));
 
 __m256i test_mm256_or_si256(__m256i a, __m256i b) {
   // CHECK-LABEL: test_mm256_or_si256

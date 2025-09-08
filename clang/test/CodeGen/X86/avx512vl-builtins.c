@@ -816,6 +816,7 @@ __m128i test_mm_maskz_mullo_epi32 (__mmask8 __M, __m128i __A, __m128i __B) {
   //CHECK: select <4 x i1> %{{.*}}, <4 x i32> %{{.*}}, <4 x i32> %{{.*}}
   return _mm_maskz_mullo_epi32(__M, __A, __B);
 }
+TEST_CONSTEXPR(match_v4si(_mm_maskz_mullo_epi32(0xF, (__m128i)(__v4si){+1, -2, +3, -4}, (__m128i)(__v4si){-32, -30, +28, +26}), -32, 60, 84, -104));
 
 __m128i test_mm_mask_mullo_epi32 (__m128i __W, __mmask8 __M, __m128i __A,
           __m128i __B) {
@@ -824,6 +825,7 @@ __m128i test_mm_mask_mullo_epi32 (__m128i __W, __mmask8 __M, __m128i __A,
   //CHECK: select <4 x i1> %{{.*}}, <4 x i32> %{{.*}}, <4 x i32> %{{.*}}
   return _mm_mask_mullo_epi32(__W, __M, __A, __B);
 }
+TEST_CONSTEXPR(match_v4si(_mm_mask_mullo_epi32(_mm_set1_epi32(1), 0xF, (__m128i)(__v4si){+1, -2, +3, -4}, (__m128i)(__v4si){-32, -30, +28, +26}), -32, 60, 84, -104));
 
 __m256i test_mm256_maskz_mullo_epi32 (__mmask8 __M, __m256i __A, __m256i __B) {
   //CHECK-LABEL: test_mm256_maskz_mullo_epi32
@@ -831,6 +833,7 @@ __m256i test_mm256_maskz_mullo_epi32 (__mmask8 __M, __m256i __A, __m256i __B) {
   //CHECK: select <8 x i1> %{{.*}}, <8 x i32> %{{.*}}, <8 x i32> %{{.*}}
   return _mm256_maskz_mullo_epi32(__M, __A, __B);
 }
+TEST_CONSTEXPR(match_v8si(_mm256_maskz_mullo_epi32(0xF0, (__m256i)(__v8si){+1, -2, +3, -4, +5, -6, +7, -8}, (__m256i)(__v8si){-32, -30, +28, +26, -24, -22, +20, +18}), 0, 0, 0, 0, -120, 132, 140, -144));
 
 __m256i test_mm256_mask_mullo_epi32 (__m256i __W, __mmask8 __M, __m256i __A,
        __m256i __B) {
@@ -839,6 +842,7 @@ __m256i test_mm256_mask_mullo_epi32 (__m256i __W, __mmask8 __M, __m256i __A,
   //CHECK: select <8 x i1> %{{.*}}, <8 x i32> %{{.*}}, <8 x i32> %{{.*}}
   return _mm256_mask_mullo_epi32(__W, __M, __A, __B);
 }
+TEST_CONSTEXPR(match_v8si(_mm256_mask_mullo_epi32(_mm256_set1_epi32(1), 0xF0, (__m256i)(__v8si){+1, -2, +3, -4, +5, -6, +7, -8}, (__m256i)(__v8si){-32, -30, +28, +26, -24, -22, +20, +18}), 1, 1, 1, 1, -120, 132, 140, -144));
 
 __m256i test_mm256_and_epi32 (__m256i __A, __m256i __B) {
   //CHECK-LABEL: test_mm256_and_epi32

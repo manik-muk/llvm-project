@@ -243,6 +243,7 @@ __m512i test_mm512_mullo_epi64 (__m512i __A, __m512i __B) {
   // CHECK: mul <8 x i64>
   return (__m512i) _mm512_mullo_epi64(__A, __B);
 }
+TEST_CONSTEXPR(match_v8di(_mm512_mullo_epi64((__m512i)(__v8di){+1, -2, +3, -4, +5, -6, +7, -8}, (__m512i)(__v8di){-32, -30, +28, +26, -24, -22, +20, +18}), -32, 60, 84, -104, -120, 132, 140, -144));
 
 __m512i test_mm512_mask_mullo_epi64 (__m512i __W, __mmask8 __U, __m512i __A, __m512i __B) {
   // CHECK-LABEL: test_mm512_mask_mullo_epi64
@@ -250,6 +251,7 @@ __m512i test_mm512_mask_mullo_epi64 (__m512i __W, __mmask8 __U, __m512i __A, __m
   // CHECK: select <8 x i1> %{{.*}}, <8 x i64> %{{.*}}, <8 x i64> %{{.*}}
   return (__m512i) _mm512_mask_mullo_epi64(__W, __U, __A, __B);
 }
+TEST_CONSTEXPR(match_v8di(_mm512_mask_mullo_epi64(_mm512_set1_epi64(1), 0xF0, (__m512i)(__v8di){+1, -2, +3, -4, +5, -6, +7, -8}, (__m512i)(__v8di){-32, -30, +28, +26, -24, -22, +20, +18}), 1, 1, 1, 1, -120, 132, 140, -144));
 
 __m512i test_mm512_maskz_mullo_epi64 (__mmask8 __U, __m512i __A, __m512i __B) {
   // CHECK-LABEL: test_mm512_maskz_mullo_epi64
@@ -257,6 +259,7 @@ __m512i test_mm512_maskz_mullo_epi64 (__mmask8 __U, __m512i __A, __m512i __B) {
   // CHECK: select <8 x i1> %{{.*}}, <8 x i64> %{{.*}}, <8 x i64> %{{.*}}
   return (__m512i) _mm512_maskz_mullo_epi64(__U, __A, __B);
 }
+TEST_CONSTEXPR(match_v8di(_mm512_maskz_mullo_epi64(0xF0, (__m512i)(__v8di){+1, -2, +3, -4, +5, -6, +7, -8}, (__m512i)(__v8di){-32, -30, +28, +26, -24, -22, +20, +18}), 0, 0, 0, 0, -120, 132, 140, -144));
 
 __m512d test_mm512_xor_pd (__m512d __A, __m512d __B) {
   // CHECK-LABEL: test_mm512_xor_pd
